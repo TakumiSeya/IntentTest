@@ -13,10 +13,15 @@ import android.widget.TextView;
 
 public class SubActivity extends AppCompatActivity {
 
+    private TextView label;
+    private TestView c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
+
+
 
         Intent intent = getIntent();
         String selectedText = intent.getStringExtra("Text");
@@ -34,10 +39,13 @@ public class SubActivity extends AppCompatActivity {
         ImageView imageView2 = (ImageView)findViewById(R.id.selected_photo2);
         imageView2.setImageResource(selectedPhoto2);
 
-        //setContentView(new DrawTest(this));
+        label = (TextView) this.findViewById(R.id.label);
+        label.setText("abcd123456789cdefg\n" + "1234567893456978\n" +
+                "hijklmnopq012698745rst4565848uvwxlmnopq\n" +
+                "\n\n\n012698745rst4565848\nuvwx" );
+
+        c = (TestView) this.findViewById(R.id.test_view);
 
     }
-
-
 
 }
