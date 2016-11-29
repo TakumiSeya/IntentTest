@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
 // 後で使います
 //public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -83,6 +83,31 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             "Shanklin"
     };
 
+    /*
+        example colors
+        red     (255, 0, 0)
+        lime    (0, 255, 0)
+        blue    (0, 0, 255)
+        aqua    (0, 255, 255)
+        fuchsia (255, 0, 255)
+        yellow  (255, 255, 0)
+        gray    (128, 128, 128)
+        black   (0, 0, 0)
+
+        http://www.netyasun.com/home/color.html
+     */
+    private static final int[] colorR = {
+            255, 0, 0, 0, 255, 255, 128, 0
+    };
+
+    private static final int[] colorG = {
+            0, 255, 0, 255, 0, 255, 128, 0
+    };
+
+    private static final int[] colorB = {
+            0, 0, 255, 255, 255, 0, 128, 0
+    };
+
     private static final int milks = R.drawable.ic_bottle_horizonal;
 
 
@@ -129,6 +154,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         String selectedStatus = "";
         selectedStatus = poopCheckAboutStatus(poopStatus[position]);
 
+        int selectedColorR = colorR[position];
+        int selectedColorG = colorG[position];
+        int selectedColorB = colorB[position];
+
+        String hexR = Integer.toHexString( selectedColorR );
+        String hexG = Integer.toHexString( selectedColorG );
+        String hexB = Integer.toHexString( selectedColorB );
+
+        String selectedColorCode = "#" + hexR + hexG + hexB;
+
         // インテントにセット
         intent.putExtra("Text", selectedText);
         intent.putExtra("Photo", selectedPhoto);
@@ -138,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         intent.putExtra("PoopSmell", selectedSmell);
         intent.putExtra("PoopAmount", selectedAmount);
         intent.putExtra("PoopStatus", selectedStatus);
+        intent.putExtra("Color", selectedColorCode);
+        //intent.putExtra("ColorG", selectedColorG);
+        //intent.putExtra("ColorB", selectedColorB);
         // Activity をスイッチする
         startActivity(intent);
     }

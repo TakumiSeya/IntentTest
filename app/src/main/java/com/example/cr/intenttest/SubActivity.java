@@ -6,21 +6,28 @@ package com.example.cr.intenttest;
 
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 public class SubActivity extends AppCompatActivity {
 
     private TextView label;
-    private TestView c;
+    private TestView testView;
+    ImageButton bt;
+    int color_flag = 0;
+    int r = 128, g = 128, b = 128;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
-
 
 
         Intent intent = getIntent();
@@ -32,6 +39,7 @@ public class SubActivity extends AppCompatActivity {
         String selectedSmell = intent.getStringExtra("PoopSmell");
         String selectedAmount = intent.getStringExtra("PoopAmount");
         String selectedStatus = intent.getStringExtra("PoopStatus");
+        String selectedColorCode = intent.getStringExtra("Color");
 
         TextView textView = (TextView)findViewById(R.id.selected_text);
         textView.setText(selectedText);
@@ -55,6 +63,25 @@ public class SubActivity extends AppCompatActivity {
         TextView textView6 = (TextView)findViewById(R.id.selected_status);
         textView6.setText(selectedStatus);
 
+
+        bt = (ImageButton)findViewById(R.id.picture);
+        bt.setBackgroundResource(R.drawable.round_button_selector);
+
+
+        GradientDrawable d = new GradientDrawable();
+        d.setColor(Color.parseColor(selectedColorCode));
+        d.setShape(GradientDrawable.OVAL);
+        bt.setBackgroundDrawable(d);
+        //bt.setBackgroundColor(Color.parseColor("#ffffff"));
+
+
+
+
+
+
+
+
+
         /*
         label = (TextView) this.findViewById(R.id.label);
         label.setText("abcd123456789cdefg\n" + "1234567893456978\n" +
@@ -63,6 +90,9 @@ public class SubActivity extends AppCompatActivity {
 
         c = (TestView) this.findViewById(R.id.test_view);
         */
+
     }
 
+
 }
+
