@@ -40,6 +40,37 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             R.drawable.ic_08
     };
 
+    private static final int[] poopLabels = {
+            3, 4, 9, 2, 4, 5, 3, 8
+    };
+
+    private static final String[] poopComments = {
+            "2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。",
+            "6~7日観察を続け、判別結果が「4」のまま、あるいは1~3へと変化したら最寄りの小児科(もしくは産科)を受診しましょう。",
+            "ウンチに赤みがかかっています。2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。",
+            "ウンチの黒みが非常に強いです。2~3日以内に最寄りの小児科(もしくは産科)を受診しましょう。",
+            "健康なウンチであると思われます。"
+    };
+
+    private static final int[] poopSmell = {
+            3, 3, 3, 3, 1, 1, 3, 3
+    };
+
+
+    private static final int[] poopAmount = {
+            2, 2, 2, 2, 1, 0, 3, 2
+    };
+
+    private static final int[] poopStatus = {
+            2, 2, 1, 1, 1, 1, 2, 2
+    };
+
+    private static final String[][] poopCheckComments = {
+            {"腐敗臭", "酸っぱい", "大人臭", "無臭"},
+            {"多い", "少し多い", "いつも通り", "少し少ない", "少ない"},
+            {"水っぽい", "少し水っぽい", "いつも通り", "少し固形っぽい", "固形っぽい"}
+    };
+
     private static final String[] texts = {
             // Scenes of Isle of Wight
             "Ventnor",
@@ -85,13 +116,67 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         int selectedPhoto = photos[position];
         String selectedMemo = texts[position];
         int selectedPhoto2 = milks;
+
+        String poopComment = "";
+        poopComment = poopCheckComment(poopLabels[position]);
+
+        String selectedSmell = "";
+        selectedSmell = poopCheckAboutSmell(poopSmell[position]);
+
+        String selectedAmount = "";
+        selectedAmount = poopCheckAboutAmount(poopAmount[position]);
+
+        String selectedStatus = "";
+        selectedStatus = poopCheckAboutStatus(poopStatus[position]);
+
         // インテントにセット
         intent.putExtra("Text", selectedText);
         intent.putExtra("Photo", selectedPhoto);
         intent.putExtra("Memo", selectedMemo);
         intent.putExtra("Milk", selectedPhoto2);
+        intent.putExtra("PoopComment", poopComment);
+        intent.putExtra("PoopSmell", selectedSmell);
+        intent.putExtra("PoopAmount", selectedAmount);
+        intent.putExtra("PoopStatus", selectedStatus);
         // Activity をスイッチする
         startActivity(intent);
+    }
+
+    public static String poopCheckComment(int poopLabel) {
+        String returnComment = poopComments[4];
+
+        if((1 <= poopLabel) && (poopLabel < 4)) {
+            returnComment = poopComments[0];
+        }
+        else if(poopLabel == 4) {
+            returnComment = poopComments[1];
+        }
+        else if(poopLabel == 8) {
+            returnComment = poopComments[2];
+        }
+        else if(poopLabel == 9) {
+            returnComment = poopComments[3];
+        }
+
+        return returnComment;
+    }
+
+    public static String poopCheckAboutSmell(int poopSmell) {
+        String returnComment = poopCheckComments[0][poopSmell];
+
+        return returnComment;
+    }
+
+    public static String poopCheckAboutAmount(int poopAmount) {
+        String returnComment = poopCheckComments[1][poopAmount];
+
+        return returnComment;
+    }
+
+    public static String poopCheckAboutStatus(int poopStatus) {
+        String returnComment = poopCheckComments[2][poopStatus];
+
+        return returnComment;
     }
 
 }

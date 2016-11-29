@@ -18,6 +18,7 @@ public class ListViewAdapter extends BaseAdapter {
         ImageView imageView;
         TextView textView2;
         ImageView imageView2;
+
     }
 
     private LayoutInflater inflater;
@@ -26,6 +27,7 @@ public class ListViewAdapter extends BaseAdapter {
     private int[] ids;
     private String[] memos;
     private int milks;
+    private int labels;
 
     public ListViewAdapter(Context context, int itemLayoutId, String[] scenes, int[] photos, String[] texts, int milks) {
         super();
@@ -35,6 +37,7 @@ public class ListViewAdapter extends BaseAdapter {
         this.ids = photos;
         this.memos = texts;
         this.milks = milks;
+        this.labels = labels;
     }
 
     @Override
