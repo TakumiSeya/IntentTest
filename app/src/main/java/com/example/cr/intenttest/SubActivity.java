@@ -39,12 +39,15 @@ public class SubActivity extends AppCompatActivity {
         String selectedSmell = intent.getStringExtra("PoopSmell");
         String selectedAmount = intent.getStringExtra("PoopAmount");
         String selectedStatus = intent.getStringExtra("PoopStatus");
-        String selectedColorCode = intent.getStringExtra("Color");
+        int selectedColorR = intent.getIntExtra("ColorR", 0);
+        int selectedColorG = intent.getIntExtra("ColorG", 0);
+        int selectedColorB = intent.getIntExtra("ColorB", 0);
+        //String selectedColorCode = intent.getStringExtra("Color");
 
         TextView textView = (TextView)findViewById(R.id.selected_text);
         textView.setText(selectedText);
-        ImageView  imageView = (ImageView) findViewById(R.id.selected_photo);
-        imageView.setImageResource(selectedPhoto);
+        //ImageView  imageView = (ImageView) findViewById(R.id.selected_photo);
+        //imageView.setImageResource(selectedPhoto);
 
         TextView textView2 = (TextView)findViewById(R.id.selected_text2);
         textView2.setText(selectedText2);
@@ -63,6 +66,15 @@ public class SubActivity extends AppCompatActivity {
         TextView textView6 = (TextView)findViewById(R.id.selected_status);
         textView6.setText(selectedStatus);
 
+        String hexR = String.format("%02X", selectedColorR & 0xFF);
+        String hexG = String.format("%02X", selectedColorG & 0xFF);
+        String hexB = String.format("%02X", selectedColorB & 0xFF);
+
+        //String hexR = Integer.toHexString( 128 );
+        //String hexG = Integer.toHexString( 128 );
+        //String hexB = Integer.toHexString( 128 );
+
+        String selectedColorCode = "#" + hexR + hexG + hexB;
 
         bt = (ImageButton)findViewById(R.id.picture);
         bt.setBackgroundResource(R.drawable.round_button_selector);

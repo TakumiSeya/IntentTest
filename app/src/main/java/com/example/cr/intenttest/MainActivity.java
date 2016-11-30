@@ -9,6 +9,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import static com.example.cr.intenttest.R.drawable.ic_milk_vertical_0_150px;
+import static com.example.cr.intenttest.R.drawable.ic_milk_vertical_100_150px;
+import static com.example.cr.intenttest.R.drawable.ic_milk_vertical_25_150px;
+import static com.example.cr.intenttest.R.drawable.ic_milk_vertical_50_150px;
+import static com.example.cr.intenttest.R.drawable.ic_milk_vertical_75_150px;
+
 // 後で使います
 //public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 public class MainActivity extends AppCompatActivity implements OnItemClickListener{
@@ -108,7 +114,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             0, 0, 255, 255, 255, 0, 128, 0
     };
 
-    private static final int milks = R.drawable.ic_bottle_horizonal;
+    private static final int[] milks = {
+            ic_milk_vertical_0_150px,
+            ic_milk_vertical_25_150px,
+            ic_milk_vertical_50_150px,
+            ic_milk_vertical_75_150px,
+            ic_milk_vertical_100_150px
+    };
+
+    private static final int[] milkEat = {
+            0, 2, 3, 4, 3, 2, 4, 1
+    };
 
 
     @Override
@@ -140,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         String selectedText = scenes[position];
         int selectedPhoto = photos[position];
         String selectedMemo = texts[position];
-        int selectedPhoto2 = milks;
+        int selectedPhoto2 = milks[milkEat[position]];
 
         String poopComment = "";
         poopComment = poopCheckComment(poopLabels[position]);
@@ -158,12 +174,13 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         int selectedColorG = colorG[position];
         int selectedColorB = colorB[position];
 
+        /*
         String hexR = Integer.toHexString( selectedColorR );
         String hexG = Integer.toHexString( selectedColorG );
         String hexB = Integer.toHexString( selectedColorB );
 
         String selectedColorCode = "#" + hexR + hexG + hexB;
-
+        */
         // インテントにセット
         intent.putExtra("Text", selectedText);
         intent.putExtra("Photo", selectedPhoto);
@@ -173,9 +190,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         intent.putExtra("PoopSmell", selectedSmell);
         intent.putExtra("PoopAmount", selectedAmount);
         intent.putExtra("PoopStatus", selectedStatus);
-        intent.putExtra("Color", selectedColorCode);
-        //intent.putExtra("ColorG", selectedColorG);
-        //intent.putExtra("ColorB", selectedColorB);
+        intent.putExtra("ColorR", selectedColorR);
+        intent.putExtra("ColorG", selectedColorG);
+        intent.putExtra("ColorB", selectedColorB);
         // Activity をスイッチする
         startActivity(intent);
     }

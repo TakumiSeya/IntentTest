@@ -26,10 +26,10 @@ public class ListViewAdapter extends BaseAdapter {
     private String[] titles;
     private int[] ids;
     private String[] memos;
-    private int milks;
+    private int milks[];
     private int labels;
 
-    public ListViewAdapter(Context context, int itemLayoutId, String[] scenes, int[] photos, String[] texts, int milks) {
+    public ListViewAdapter(Context context, int itemLayoutId, String[] scenes, int[] photos, String[] texts, int milks[]) {
         super();
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.itemLayoutId = itemLayoutId;
@@ -67,7 +67,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         holder.textView2.setText(memos[position]);
 
-        holder.imageView2.setImageResource(milks);
+        holder.imageView2.setImageResource(milks[0]);
 
         return convertView;
     }
